@@ -60,4 +60,4 @@ php artisan db:seed
 
 Go to the browser and enjoy !
 
-<a href="fb.com/NguyenHuuNguyenY"><button style="color: white; background-color:#122f5e; border-radius: 7px">My Facebook</button></a>
+<a href="https://fb.com/NguyenHuuNguyenY"><button style="color: white; background-color:#122f5e; border-radius: 7px">My Facebook</button></a>

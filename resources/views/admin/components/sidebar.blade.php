@@ -42,8 +42,10 @@
                     <span>User Account</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
-                    <a class="dropdown-item " href="{{url('admin/users')}}">All users</a>
-                    <a class="dropdown-item " href="{{url('admin/add-user')}}">Add Users</a>
+                    <a class="dropdown-item " href="{{route('users')}}">All users</a>
+                    @if(Auth::user()->role == 'administrator')
+                        <a class="dropdown-item " href="{{route('user.create')}}">Add Users</a>
+                    @endif
                 </div>
             </li>
         </ul>

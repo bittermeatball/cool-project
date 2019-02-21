@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->default('subscriber'); // Only fillable in admin
+            $table->string('status')->default('active'); // Only fillable in admin
             $table->string('avatar')->default('http://meetdev.com/assets/img/icon-user-default.png');
             $table->string('bgimage')->default('https://i.redd.it/3t88melm5eb01.jpg');
             $table->string('address')->default('Some address');

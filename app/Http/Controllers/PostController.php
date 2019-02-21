@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -15,8 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        $posts = Post::all();
         // View all posts
-        return View::make('admin.posts-manager.all-posts');
+        return View::make('admin.posts-manager.all-posts')->with('posts',$posts);
     }
 
     /**
@@ -37,7 +39,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post([
+            'post_title' => $request->get('post-title'),
+            'post_description'=> $request->get('post-description'),
+            'post_thumbnail'=> $request->get('post-thumbnail'),
+            'post_content'=> $request->get('post-content'),
+            'post_author'=> Auth::user()->name,
+          ]);
+          $post->save();
+          return redirect('/admin/post');
     }
 
     /**
@@ -48,7 +58,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        // $post = Post::find($id);
+        // return View::make('admin.posts-manager.post-details')
+        // ->with('post',$post);
     }
 
     /**
@@ -59,7 +71,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $post = Post::find($id);
+
+        // show the view and pass the user to it
+        return View::make('admin.posts-manager.edit-post')->with('post',$post);
     }
 
     /**
@@ -71,7 +86,14 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post = Post::find($id);
+
+        $post->title = $request->get('post-title');
+        $post->description = $request->get('post-description');
+        $post->thumbnail = $request->get('post-thumbnail');
+        $post->content = $request->get('post-content');
+        $post->title =  Auth::user()->name;
+
     }
 
     /**
@@ -82,6 +104,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+   
+        return redirect('/admin/posts');
     }
 }

@@ -53,7 +53,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
                     <a class="dropdown-item" href="{{Route('user.show',Auth::user()->id)}}"><i class="material-icons">&#xE7FD;</i> Profile</a>
-                    <a class="dropdown-item" href="{{Route('user.edit',Auth::user()->id)}}"><i class="material-icons">&#xE8B8;</i> Edit Profile</a>
+                    <a class="dropdown-item" href="{{Route('profile.edit',Auth::user()->id)}}"><i class="material-icons">&#xE8B8;</i> Edit Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="material-icons text-danger">&#xE879;</i> Logout 

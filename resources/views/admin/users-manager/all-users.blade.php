@@ -36,9 +36,11 @@
                                 <div class="card card-small mb-4">
                                     <div class="card-header border-bottom">
                                         <form class="col-sm-12 col-md-6">
-                                            <a href="add-user">
-                                                <button type="button" class="mb-2 btn btn-success mr-1">+ Add user</button>
-                                            </a>                                            
+                                            @if(Auth::user()->role == 'administrator')
+                                                <a href="{{route('user.create')}}">
+                                                    <button type="button" class="mb-2 btn btn-success mr-1">+ Add user</button>
+                                                </a>
+                                            @endif
                                             <div class="form-group d-inline-block" style="width: 60%">
                                                 <input type="text" class="form-control" id="" placeholder="Search">
                                             </div>
@@ -63,14 +65,26 @@
                                                     <td>{{$user->name}}</td>
                                                     <td>{{$user->email}}</td>
                                                     <td>{{$user->role}}</td>
-                                                    <td>Active</td>
+                                                    @if($user->status =='active')
+                                                        <td style="color: #20df50">Active</td>
+                                                    @else
+                                                        <td style="color: #ed3034">Banned</td>
+                                                    @endif
                                                     <td>
                                                         <a href="{{ route('user.show',$user->id)}}" >
                                                             <button type="button"class="mb-2 btn btn-outline-info mr-1">Details</button>
                                                         </a>
+                                                    @if(Auth::user()->role == 'administrator')
                                                         <a href="{{ route('user.edit',$user->id)}}">
                                                             <button type="button" class="mb-2 btn btn-outline-warning mr-1">Edit</button>
-                                                        </a>                                                        
+                                                        </a>
+                                                        {{-- Activate button --}}
+                                                        @if($user->status =='deactivated')
+                                                            <form method="POST" action="{{route('user.activate', $user->id)}}">
+                                                                {{ csrf_field() }}
+                                                                <button class="btn btn-outline-success" type="submit">Activate</button>
+                                                            </form>
+                                                        @endif
                                                         <button type="button" class="mb-2 btn btn-outline-danger mr-1" data-toggle="modal" data-target="#exampleModal">
                                                             Delete
                                                         </button>
@@ -87,11 +101,18 @@
                                                                     <div class="modal-body text-center">
                                                                         <i class="fas fa-exclamation-triangle" style="font-size: 72px; color: red"></i>
                                                                         <h3>Are your sure ? This action can't be undone !</h3>
+                                                                        <h4><small><em>"User can be kept but deactivate"</em></small></h4>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                        @if($user->status =='active')
+                                                                            {{-- Deactivate button --}}
+                                                                            <form method="POST" action="{{route('user.deactivate', $user->id)}}">
+                                                                                {{ csrf_field() }}
+                                                                                <button class="btn btn-alert" type="submit">Deactivate</button>
+                                                                            </form>
+                                                                        @endif
                                                                         {{-- Delete button --}}
-
                                                                         <form method="POST" action="{{route('user.destroy', $user->id)}}">
                                                                             @method('delete')
                                                                             {{ csrf_field() }}
@@ -102,6 +123,7 @@
                                                             </div>
                                                         </div>
                                                         {{-- End modal --}}
+                                                    @endif
                                                     </td>
                                                 </tr>
                                                 @endforeach

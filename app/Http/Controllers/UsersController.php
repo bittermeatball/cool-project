@@ -6,19 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+
 use App\Http\Requests\UserRequest; // Custom request
 use App\Http\Requests\UserPassword; // Custom request
 use App\Http\Requests\UserSocial; // Custom request
+
 use App\User;
 
 class UsersController extends Controller
 {
-
-    // public function __construct()
-    // {
-    //     $this->console_debug($data);
-    // }
-
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +24,7 @@ class UsersController extends Controller
     {
         // Show all users
         $users = User::all();
-        return view('admin.users-manager.all-users', compact('users'));
+        return View::make('admin.users-manager.all-users')->with('users',$users);
     }
 
     /**
@@ -39,7 +35,7 @@ class UsersController extends Controller
     public function create()
     {
         // Show add user form
-        return view('admin.users-manager.add-user');
+        return View::make('admin.users-manager.add-user');
     }
     /**
      * Store the incoming blog post.
@@ -82,8 +78,6 @@ class UsersController extends Controller
         $user = User::find($id);
 
         // show the view and pass the user to it
-        // return View::make('admin.user-profile')
-        //     ->with('user', $user);
 
         return View::make('admin.users-manager.user-profile')
         ->with('user',$user);
@@ -100,8 +94,6 @@ class UsersController extends Controller
         $user = User::find($id);
 
         // show the view and pass the user to it
-        // return View::make('admin.user-profile')
-        //     ->with('user', $user);
         return View::make('admin.users-manager.edit-user')->with('user',$user);
     }
 
@@ -166,13 +158,34 @@ class UsersController extends Controller
         ->with('user',$user)
         ->with('successMsg','You have successfully updated your infomation .');
     }
-
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function activate($id)
+    {
+
+        $user =  User::find($id);
+        $user->status = 'active';
+
+        $user->save();
+   
+        return redirect('/admin/users');
+    }
+
+    public function deactivate($id)
+    {
+
+        $user =  User::find($id);
+        $user->status = 'deactivated';
+
+        $user->save();
+   
+        return redirect('/admin/users');
+    }
 
     public function destroy($id)
     {

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use Closure;
 
-class CheckRole
+class CheckActive
 {
     /**
      * Handle an incoming request.
@@ -15,13 +15,13 @@ class CheckRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $roles)
+    public function handle($request, Closure $next, $status)
     {
-        if ( Auth::check() && Auth::user()->role == $roles)
+        if ( Auth::check() && Auth::user()->status == $status)
         {
             return $next($request);
         } else {
-            return redirect('/403');
+            return redirect('/403/banned');
         }
     }
 }

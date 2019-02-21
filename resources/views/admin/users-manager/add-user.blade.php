@@ -67,7 +67,7 @@
                         </li>
                       </ul>
                     </div>
-                    <form method="POST" action="{{route('add-user.store')}}" class="py-4">
+                    <form method="POST" action="{{route('user.store')}}" class="py-4">
                       {{ csrf_field() }}
                       <div class="form-row mx-4">
                         <div class="col mb-3">

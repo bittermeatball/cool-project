@@ -36,9 +36,11 @@
                                 <div class="card card-small mb-4">
                                     <div class="card-header border-bottom">
                                         <form class="col-sm-12 col-md-6">
-                                            <a href="{{route('post.create')}}">
-                                                <button type="button" class="mb-2 btn btn-success mr-1">+ Add post</button>
-                                            </a>                                            
+                                            @if(Auth::user()->role == 'administrator' || Auth::user()->role == 'editor')
+                                                <a href="{{route('post.create')}}">
+                                                    <button type="button" class="mb-2 btn btn-success mr-1">+ Add post</button>
+                                                </a>
+                                            @endif
                                             <div class="form-group d-inline-block" style="width: 60%">
                                                 <input type="text" class="form-control" id="" placeholder="Search">
                                             </div>
@@ -52,7 +54,7 @@
                                                     <th scope="col" class="border-0">Title</th>
                                                     <th scope="col" class="border-0">Description</th>
                                                     <th scope="col" class="border-0">Thumbnail</th>
-                                                    <th scope="col" class="border-0">Action</th>
+                                                    <th scope="col" class="border-0">Status</th>
                                                     <th scope="col" class="border-0"></th>
                                                 </tr>
                                             </thead>
@@ -63,12 +65,12 @@
                                                     <td>{{$post->post_title}}</td>
                                                     <td>{{$post->post_description}}</td>
                                                     <td>
-                                                        <img src="{{$post->post_thumbnail}}">
+                                                        <img src="{{$post->post_thumbnail}}" width="150" height="auto">
                                                     </td>
-                                                    @if($post->status =='active')
-                                                        <td style="color: #20df50">Active</td>
-                                                    @else
-                                                        <td style="color: #ed3034">Banned</td>
+                                                    @if($post->status =='publish')
+                                                        <td style="color: #20df50">Published</td>
+                                                    @elseif($post->status =='draft')
+                                                        <td style="color: gray">Draft</td>
                                                     @endif
                                                     <td>
                                                         <a href="{{ route('post.show',$post->id)}}" >

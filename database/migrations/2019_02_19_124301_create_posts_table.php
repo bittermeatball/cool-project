@@ -18,8 +18,9 @@ class CreatePostsTable extends Migration
             $table->string('post_title')->default('Lorem ipsum');
             $table->string('post_description')->default('Lorem ipsum');
             $table->string('post_thumbnail')->default('Lorem ipsum');
-            $table->string('post_content')->default('Lorem ipsum');
-            $table->string('post_author')->default('admin');
+            $table->string('post_content',3000)->default('Lorem ipsum');
+            $table->string('post_author')->default('Editor');
+            $table->string('status')->default('draft');
             $table->timestamps();
         });
     }

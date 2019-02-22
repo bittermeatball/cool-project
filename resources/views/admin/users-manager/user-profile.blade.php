@@ -68,12 +68,12 @@
                       </div>
                     </div>
                     <div class="user-details__tags p-4">
-                      <span class="badge badge-pill badge-light text-light text-uppercase mb-2 border">User Experience</span>
-                      <span class="badge badge-pill badge-light text-light text-uppercase mb-2 border">UI Design</span>
-                      <span class="badge badge-pill badge-light text-light text-uppercase mb-2 border">React JS</span>
-                      <span class="badge badge-pill badge-light text-light text-uppercase mb-2 border">HTML & CSS</span>
-                      <span class="badge badge-pill badge-light text-light text-uppercase mb-2 border">JavaScript</span>
-                      <span class="badge badge-pill badge-light text-light text-uppercase mb-2 border">Bootstrap 4</span>
+                      <?php
+                      $userTags = preg_split ("/\,/", $user->userTags);  
+                      ?>
+                      @foreach($userTags as $Tag)
+                        <span class="badge badge-pill badge-light text-light text-uppercase mb-2 border">{{$Tag}}</span>
+                      @endforeach
                     </div>
                   </div>
                 </div>

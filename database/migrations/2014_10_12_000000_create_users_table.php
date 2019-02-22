@@ -21,12 +21,12 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('role')->default('subscriber'); // Only fillable in admin
             $table->string('status')->default('active'); // Only fillable in admin
-            $table->string('avatar')->default('http://meetdev.com/assets/img/icon-user-default.png');
-            $table->string('bgimage')->default('https://i.redd.it/3t88melm5eb01.jpg');
-            $table->string('address')->default('Some address');
-            $table->string('phone')->default('0123456789');
-            $table->string('bio')->default('Your biography');
-            $table->string('userTags')->default('Open computer,');
+            $table->string('avatar')->default('http://meetdev.com/assets/img/icon-user-default.png')->nullable();
+            $table->string('bgimage')->default('https://i.redd.it/3t88melm5eb01.jpg')->nullable();
+            $table->string('address')->default('Some address')->nullable();
+            $table->string('phone')->default('0123456789')->nullable();
+            $table->string('bio')->default('Your biography')->nullable();
+            $table->string('userTags')->default('Open computer,')->nullable();
             // Social
             $table->string('facebook')->default('https://fb.com')->nullable();
             $table->string('twitter')->default('https://twitter.com')->nullable();

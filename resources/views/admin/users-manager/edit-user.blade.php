@@ -88,7 +88,11 @@
 
                       {{-- General edit --}}
                       <div id="general-edit" class="tab-pane fade active show">
+                        @if(Auth::user()->role == 'administrator')
                         <form method="POST" action="{{route('user.update',$user->id)}}" class="py-4">
+                        @else
+                        <form method="POST" action="{{route('profile.update',$user->id)}}" class="py-4">
+                        @endif
                           {{ csrf_field() }}
                           <div class="form-row mx-4">
                             <div class="col mb-3">
@@ -109,14 +113,31 @@
                                     </span>
                                   @endif
                                 </div>
+                                @if(Auth::user()->role == 'administrator')
                                 <div class="form-group col-md-6">
                                   <label for="role">Role</label>
                                   <select class="custom-select" name="role">
-                                      <option value="subscriber">Subscriber</option>
-                                      <option value="editor">Editor</option>
-                                      <option value="administrator">Administrator</option>
+                                    <?php // ProfileController also return $user ?>
+                                    @switch($user->role)
+                                      @case('administrator')
+                                        <option value="administrator">Administrator</option>
+                                        <option value="subscriber">Subscriber</option>
+                                        <option value="editor">Editor</option>
+                                        @break
+                                      @case('subscriber')
+                                        <option value="subscriber">Subscriber</option>
+                                        <option value="editor">Editor</option>
+                                        <option value="administrator">Administrator</option>
+                                        @break
+                                      @case('editor')
+                                        <option value="editor">Editor</option>
+                                        <option value="subscriber">Subscriber</option>
+                                        <option value="administrator">Administrator</option>
+                                        @break
+                                    @endswitch
                                   </select>
                                 </div>
+                                @endif
                                 <div class="form-group col-md-6">
                                   <label for="userLocation">Location</label>
                                   <div class="input-group input-group-seamless">
@@ -235,7 +256,11 @@
 
                       {{-- Social edit --}}
                       <div id="social-edit" class="tab-pane fade ">
-                        <form method="POST" action="{{route('user.update.social',$user->id)}}">
+                          @if(Auth::user()->role == 'administrator')
+                          <form method="POST" action="{{route('user.update.social',$user->id)}}" class="py-4">
+                          @else
+                          <form method="POST" action="{{route('profile.update.social',$user->id)}}" class="py-4">
+                          @endif
                           {{ csrf_field() }}
                           <div class="form-row mx-4">
                             <div class="col mb-3">
@@ -322,7 +347,11 @@
 
                       {{-- Change password --}}
                       <div id="password-change" class="tab-pane fade">
-                        <form method="POST" action="{{route('user.update.password',$user->id)}}">
+                        @if(Auth::user()->role == 'administrator')
+                        <form method="POST" action="{{route('user.update.password',$user->id)}}" class="py-4">
+                        @else
+                        <form method="POST" action="{{route('profile.update.password',$user->id)}}" class="py-4">
+                        @endif
                           {{ csrf_field() }}
                           <div class="form-row mx-4">
                             <div class="col mb-3">

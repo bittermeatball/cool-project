@@ -72,16 +72,17 @@
                                                     @endif
                                                     <td>
                                                         <a href="{{ route('post.show',$post->id)}}" >
-                                                            <button type="button"class="mb-2 btn btn-outline-info mr-1">Details</button>
+                                                            <button type="button"class="mb-2 btn btn-outline-info mr-1">Preview</button>
                                                         </a>
+                                                    @if(Auth::user()->role == 'administrator' || Auth::user()->role == 'editor')
                                                         <a href="{{ route('post.edit',$post->id)}}">
                                                             <button type="button" class="mb-2 btn btn-outline-warning mr-1">Edit</button>
                                                         </a>
                                                         {{-- Activate button --}}
-                                                        @if($post->status =='deactivated')
+                                                        @if($post->status =='draft')
                                                             <form method="POST" action="{{route('post.activate', $post->id)}}">
                                                                 {{ csrf_field() }}
-                                                                <button class="btn btn-outline-success" type="submit">Activate</button>
+                                                                <button class="btn btn-outline-success" type="submit">Publish</button>
                                                             </form>
                                                         @endif
                                                         <button type="button" class="mb-2 btn btn-outline-danger mr-1" data-toggle="modal" data-target="#exampleModal">
@@ -100,15 +101,15 @@
                                                                     <div class="modal-body text-center">
                                                                         <i class="fas fa-exclamation-triangle" style="font-size: 72px; color: red"></i>
                                                                         <h3>Are your sure ? This action can't be undone !</h3>
-                                                                        <h4><small><em>"Post can be kept but deactivate"</em></small></h4>
+                                                                        <h4><small><em>"Post can be unpublish by saved into draft"</em></small></h4>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                                         @if($post->status =='active')
                                                                             {{-- Deactivate button --}}
-                                                                            <form method="POST" action="{{route('post.deactivate', $post->id)}}">
+                                                                            <form method="POST" action="{{route('post.draft', $post->id)}}">
                                                                                 {{ csrf_field() }}
-                                                                                <button class="btn btn-alert" type="submit">Deactivate</button>
+                                                                                <button class="btn btn-alert" type="submit">Save draft</button>
                                                                             </form>
                                                                         @endif
                                                                         {{-- Delete button --}}
@@ -122,6 +123,7 @@
                                                             </div>
                                                         </div>
                                                         {{-- End modal --}}
+                                                    @endif
                                                     </td>
                                                 </tr>
                                                 @endforeach

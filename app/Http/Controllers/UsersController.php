@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
 use App\Http\Requests\UserRequest; // Custom request
+use App\Http\Requests\UserEditRequest; // Custom request
 use App\Http\Requests\UserPassword; // Custom request
 use App\Http\Requests\UserSocial; // Custom request
 
@@ -104,7 +105,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(UserEditRequest $request, $id)
     {
         $request->validated();
 

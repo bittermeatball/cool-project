@@ -59,7 +59,9 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
                     <a class="dropdown-item " href="{{route('post.index')}}">All posts</a>
-                    <a class="dropdown-item " href="{{route('post.create')}}">Add post</a>
+                    @if(Auth::user()->role == 'administrator' || Auth::user()->role == 'editor')
+                        <a class="dropdown-item " href="{{route('post.create')}}">Add post</a>
+                    @endif
                 </div>
             </li>
         </ul>

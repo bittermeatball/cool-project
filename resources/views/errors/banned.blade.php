@@ -19,8 +19,11 @@
                 <h2>403</h2>
                 <h3>Now hold on a minute!</h3>
                 <p>Your account has been banned due to inappropriate activities !</p>
-                <a href="{{route('login')}}">
-                    <button type="button" class="btn btn-primary btn-pill">&larr; Back to login</button>                
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <button type="button" class="btn btn-primary btn-pill">&larr; Back to login</button> 
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </a>
             </div> <!-- / .error_content -->
         </div> <!-- / .error -->

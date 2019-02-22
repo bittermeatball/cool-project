@@ -73,7 +73,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $post = Post::find($id);
+        $post = Post::find($post);
 
         // show the view and pass the user to it
         return View::make('admin.posts-manager.edit-post')->with('post',$post);
@@ -88,7 +88,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $post = Post::find($id);
+        $post = Post::find($post);
 
         $post->title = $request->get('post-title');
         $post->description = $request->get('post-description');
@@ -106,7 +106,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post = Post::find($id);
+        $post = Post::find($post);
         $post->delete();
    
         return redirect('/admin/posts');

@@ -17,11 +17,15 @@ class CheckRole
      */
     public function handle($request, Closure $next, $roles)
     {
-        if ( Auth::check() && Auth::user()->role == $roles)
-        {
-            return $next($request);
-        } else {
-            return redirect('/403');
+        if ( Auth::check() ) {
+            if ( Auth::user()->role == $roles || Auth::user()->role == 'administrator' )
+            {
+                return $next($request);
+            }
+            else 
+            {
+                return redirect('/403');
+            }              
         }
     }
 }

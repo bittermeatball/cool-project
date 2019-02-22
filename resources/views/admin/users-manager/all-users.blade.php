@@ -65,35 +65,31 @@
                                                     <td>{{$user->name}}</td>
                                                     <td>{{$user->email}}</td>
                                                     <td>{{$user->role}}</td>
+
                                                     @if($user->status =='active')
                                                         <td style="color: #20df50">Active</td>
                                                     @else
                                                         <td style="color: #ed3034">Banned</td>
                                                     @endif
+
                                                     <td>
                                                         <a href="{{ route('user.show',$user->id)}}" >
                                                             <button type="button"class="mb-2 btn btn-outline-info mr-1">Details</button>
                                                         </a>
+
                                                     @if(Auth::user()->role == 'administrator')
                                                         <a href="{{ route('user.edit',$user->id)}}">
                                                             <button type="button" class="mb-2 btn btn-outline-warning mr-1">Edit</button>
                                                         </a>
-                                                        {{-- Activate button --}}
-                                                        @if($user->status =='deactivated')
-                                                            <form method="POST" action="{{route('user.activate', $user->id)}}">
-                                                                {{ csrf_field() }}
-                                                                <button class="btn btn-outline-success" type="submit">Activate</button>
-                                                            </form>
-                                                        @endif
-                                                        <button type="button" class="mb-2 btn btn-outline-danger mr-1" data-toggle="modal" data-target="#exampleModal">
+                                                        <button type="button" class="mb-2 btn btn-outline-danger mr-1" data-toggle="modal" data-target="#modalOf{{$user->id}}">
                                                             Delete
                                                         </button>
                                                         <!-- Modal -->
-                                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labeledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="modalOf{{$user->id}}" tabindex="-1" role="dialog" aria-labeledby="modalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Delete user</h5>
+                                                                        <h5 class="modal-title" id="modalLabel">Delete user</h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
@@ -123,6 +119,13 @@
                                                             </div>
                                                         </div>
                                                         {{-- End modal --}}
+                                                        {{-- Activate button --}}
+                                                        @if($user->status =='deactivated')
+                                                            <form method="POST" action="{{route('user.activate', $user->id)}}">
+                                                                {{ csrf_field() }}
+                                                                <button class="btn btn-outline-success" type="submit">Activate</button>
+                                                            </form>
+                                                        @endif
                                                     @endif
                                                     </td>
                                                 </tr>

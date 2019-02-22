@@ -193,6 +193,8 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        print_r($user->id);
+        exit();
         $user->delete();
    
         return redirect('/admin/users');

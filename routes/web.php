@@ -26,34 +26,34 @@ Route::namespace('Admin')->group(function () {
                 Route::get('/profile/edit/{id}','ProfileController@edit')->name('profile.edit');
                 Route::post('/profile/edit/{id}','ProfileController@update')->name('profile.update');
                 Route::post('/profile/edit/social/{id}','ProfileController@updateSocial')->name('profile.update.social');
-                Route::post('/profile/edit/password/{id}','ProfileController@updatePassword')->name('profile.update.password');        
+                Route::post('/profile/edit/password/{id}','ProfileController@updatePassword')->name('profile.update.password');
                 // All users
                 Route::get('/users', 'UsersController@index')->name('users');
-                // Admin stuff
-                Route::middleware('role:administrator')->group(function (){
-                    // Edit user
-                    Route::get('/user/edit/{id}','UsersController@edit')->name('user.edit');
-                    Route::post('/user/edit/{id}','UsersController@update')->name('user.update');
-                    Route::post('/user/edit/social/{id}','UsersController@updateSocial')->name('user.update.social');
-                    Route::post('/user/edit/password/{id}','UsersController@updatePassword')->name('user.update.password');
-                    // Add user            
-                    Route::get('/user/add', 'UsersController@create')->name('user.create');
-                    Route::post('/user/add', 'UsersController@store')->name('user.store');
-                    // Delete user
-                    Route::post('/user/activate/{id}','UsersController@activate')->name('user.activate');
-                    Route::post('/user/deactivate/{id}','UsersController@deactivate')->name('user.deactivate');
-                    Route::delete('/user/delete/{id}','UsersController@destroy')->name('user.destroy');
+                // Editor stuff ( Administrator can also be allowed )
+                Route::middleware('role:editor')->group(function() {
+                    //----------------------- Posts controller ---------------------------//
+                    Route::resource('post', 'PostController');
+                    // Admin stuff
+                    Route::middleware('role:administrator')->group(function (){
+                        // Add user            
+                        Route::get('/user/add', 'UsersController@create')->name('user.create');
+                        Route::post('/user/add', 'UsersController@store')->name('user.store');                        
+                        // Edit user
+                        Route::get('/user/edit/{id}','UsersController@edit')->name('user.edit');
+                        Route::post('/user/edit/{id}','UsersController@update')->name('user.update');
+                        Route::post('/user/edit/social/{id}','UsersController@updateSocial')->name('user.update.social');
+                        Route::post('/user/edit/password/{id}','UsersController@updatePassword')->name('user.update.password');
+                        // Delete user
+                        Route::post('/user/activate/{id}','UsersController@activate')->name('user.activate');
+                        Route::post('/user/deactivate/{id}','UsersController@deactivate')->name('user.deactivate');
+                        Route::delete('/user/delete/{id}','UsersController@destroy')->name('user.destroy');
+                    });                    
                 });
-
                 // Show user profile
                 Route::get('/user/{id}','UsersController@show')->name('user.show');
-                //----------------------- Posts controller ---------------------------//
-                Route::resource('post', 'PostController');
             });
-
         });       
     });
- 
 });
     Route::get('/403',function(){return view('errors.403');});
     Route::get('/403/banned',function(){return view('errors.banned');});

@@ -42,14 +42,15 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post = new Post([
-            'post_title' => $request->get('post-title'),
-            'post_description'=> $request->get('post-description'),
-            'post_thumbnail'=> $request->get('post-thumbnail'),
-            'post_content'=> $request->get('post-content'),
+            'post_title' => $request->get('post_title'),
+            'post_description'=> $request->get('post_description'),
+            'post_thumbnail'=> $request->get('post_thumbnail'),
+            'post_content'=> $request->get('post_content'),
             'post_author'=> Auth::user()->name,
           ]);
-          $post->save();
-          return redirect('/admin/post');
+
+        $post->save();
+        return redirect('/admin/post');
     }
 
     /**
@@ -60,9 +61,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        // $post = Post::find($id);
-        // return View::make('admin.posts-manager.post-details')
-        // ->with('post',$post);
+        $post = Post::find($post)->first();
+
+        return View::make('admin.posts-manager.post-preview')
+        ->with('post',$post);
     }
 
     /**
@@ -90,11 +92,11 @@ class PostController extends Controller
     {
         $post = Post::find($post);
 
-        $post->title = $request->get('post-title');
-        $post->description = $request->get('post-description');
-        $post->thumbnail = $request->get('post-thumbnail');
-        $post->content = $request->get('post-content');
-        $post->title =  Auth::user()->name;
+        $post->title = $request->get('post_title');
+        $post->description = $request->get('post_description');
+        $post->thumbnail = $request->get('post_thumbnail');
+        $post->content = $request->get('post_content');
+        $post->author =  Auth::user()->name;
 
     }
 
@@ -104,6 +106,30 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
+
+     
+    public function publish($id)
+    {
+
+        $post =  Post::find($id);
+        $post->status = 'publish';
+
+        $post->save();
+   
+        return redirect('/admin/post');
+    }
+
+    public function saveDraft($id)
+    {
+
+        $post =  Post::find($id);
+        $post->status = 'draft';
+
+        $post->save();
+   
+        return redirect('/admin/post');
+    }
+
     public function destroy(Post $post)
     {
         $post = Post::find($post);

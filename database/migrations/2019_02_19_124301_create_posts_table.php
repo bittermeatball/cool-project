@@ -15,10 +15,10 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('post_title')->default('Lorem ipsum');
-            $table->string('post_description')->default('Lorem ipsum');
-            $table->string('post_thumbnail')->default('Lorem ipsum');
-            $table->string('post_content',3000)->default('Lorem ipsum');
+            $table->string('post_title')->default('Lorem ipsum')->nullable();
+            $table->string('post_description')->default('Lorem ipsum')->nullable();
+            $table->string('post_thumbnail')->default('Lorem ipsum')->nullable();
+            $table->string('post_content',3000)->default('Lorem ipsum')->nullable();
             $table->string('post_author')->default('Editor');
             $table->string('status')->default('draft');
             $table->timestamps();

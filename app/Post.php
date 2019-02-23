@@ -15,11 +15,11 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'post-title',
-        'post-description',
-        'post-thumbnail',
-        'post-content',
-        'post-author',
+        'post_title',
+        'post_description',
+        'post_thumbnail',
+        'post_content',
+        'post_author',
     ];
 
     /**
@@ -27,7 +27,7 @@ class Post extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        //
-    ];
+    // protected $hidden = [
+    //     //
+    // ];
 }

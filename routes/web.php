@@ -17,11 +17,11 @@ Route::namespace('Admin')->group(function () {
         Auth::routes();
         Route::middleware('auth')->group(function () { // Logged in
             Route::middleware('user.status:active')->group(function(){ // Only active users allowed
-                //-------------------- Home or dashboard view -------------------------//
+//-------------------------------------------- Home or dashboard view ---------------------------------------//
                 Route::get('/', 'HomeController@index')->name('dashboard');
                 Route::get('/home', 'HomeController@index')->name('dashboard');
                 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-                //------------------------ Users control -----------------------------//
+//------------------------------------------------ Users control (General) ------------------------------------------//
                 // Edit profile
                 Route::get('/profile/edit/{id}','ProfileController@edit')->name('profile.edit');
                 Route::post('/profile/edit/{id}','ProfileController@update')->name('profile.update');
@@ -31,8 +31,11 @@ Route::namespace('Admin')->group(function () {
                 Route::get('/users', 'UsersController@index')->name('users');
                 // Editor stuff ( Administrator can also be allowed )
                 Route::middleware('role:editor')->group(function() {
-                    //----------------------- Posts controller ---------------------------//
+//----------------------------------------------- Posts controller --------------------------------------//
                     Route::resource('post', 'PostController');
+                    Route::post('post/publish/{id}','PostController@publish')->name('post.publish');
+                    Route::post('post/save-draft/{id}','PostController@saveDraft')->name('post.draft');
+//------------------------------------------------ Users control (Admin) --------------------------------------//
                     // Admin stuff
                     Route::middleware('role:administrator')->group(function (){
                         // Add user            

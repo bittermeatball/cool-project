@@ -18,44 +18,31 @@ use App\User;
 
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         // Show all users
         $users = User::all();
         return View::make('admin.users-manager.all-users')->with('users',$users);
     }
+    
+    public function filterUsers($property,$filter)
+    {
+        // Show all users but filtered
+        $users = User::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+        return View::make('admin.users-manager.all-users-filtered')
+        ->with('users',$users)
+        ->with('property',$property)
+        ->with('filter',$filter);
+    }
+
     public function create()
     {
         // Show add user form
         return View::make('admin.users-manager.add-user');
     }
-    /**
-     * Store the incoming blog post.
-     *
-     * @param  UserRequest  $request
-     * @return Response
-     */
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @return \App\User
-     */
+
     public function store(UserRequest $request)
     {
         $request->validated();
@@ -70,12 +57,6 @@ class UsersController extends Controller
           return redirect('/admin/users');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $user = User::find($id);
@@ -86,12 +67,6 @@ class UsersController extends Controller
         ->with('user',$user);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $user = User::find($id);
@@ -100,13 +75,6 @@ class UsersController extends Controller
         return View::make('admin.users-manager.edit-user')->with('user',$user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(UserEditRequest $request, $id)
     {
         $request->validated();
@@ -161,12 +129,6 @@ class UsersController extends Controller
         ->with('user',$user)
         ->with('successMsg','You have successfully updated your infomation .');
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function activate($id)
     {

@@ -17,7 +17,7 @@
   <script src="{{asset('library/jquery/jquery.min.js')}}"></script>
   <script src="{{asset('library/bootstrap/js/popper.min.js')}}"></script>
   <script src="{{asset('library/bootstrap/js/bootstrap.min.js')}}"></script>
-  <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
+  <script src="{{asset('scripts/shards.min.js')}}"></script>
   <script src="{{asset('library/jquery/jquery.sharrre.min.js')}}"></script>
   <script src="{{asset('scripts/shards-dashboards.1.2.0.min.js')}}"></script>
 @endsection 

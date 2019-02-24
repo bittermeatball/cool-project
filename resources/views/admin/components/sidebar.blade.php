@@ -37,7 +37,7 @@
         <h6 class="main-sidebar__nav-title">Users manager</h6>
         <ul class="nav nav--no-borders flex-column">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
                     <i class="material-icons">&#xE7FD;</i>
                     <span>User Account</span>
                 </a>

@@ -98,6 +98,8 @@ class PostController extends Controller
         $post->content = $request->get('post_content');
         $post->author =  Auth::user()->name;
 
+        $post->save();
+        return redirect('/admin/post');
     }
 
     /**

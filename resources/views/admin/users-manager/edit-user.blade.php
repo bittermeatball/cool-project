@@ -378,14 +378,14 @@
   </main>
 @endsection
 @section('main-script')
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="{{asset('scripts/loader.js')}}"></script>
   <script src="{{asset('library/jquery/jquery.min.js')}}"></script>
   <script src="{{asset('library/bootstrap/js/popper.min.js')}}"></script>
   <script src="{{asset('library/bootstrap/js/bootstrap.min.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-  <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+  <script src="{{asset('scripts/Chart.min.js')}}"></script>
+  <script src="{{asset('scripts/shards.min.js')}}"></script>
+  <script src="{{asset('library/jquery/jquery.sharrre.min.js')}}"></script>
   <script src="{{asset('scripts/shards-dashboards.1.2.0.min.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+  <script src="{{asset('library/bootstrap/js/bootstrap-tagsinput.min.js')}}"></script>
   <script src="{{asset('scripts/app/app-edit-user-profile.1.2.0.min.js')}}"></script>
 @endsection 

@@ -107,7 +107,7 @@
   <script src="{{asset('library/jquery/jquery.min.js')}}"></script>
   <script src="{{asset('library/bootstrap/js/popper.min.js')}}"></script>
   <script src="{{asset('library/bootstrap/js/bootstrap.min.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script src="{{asset('scripts/Chart.min.js')}}"></script>
   <script src="{{asset('library/jquery/jquery.sharrre.min.js')}}"></script>
   <script src="{{asset('scripts/shards-dashboards.1.2.0.min.js')}}"></script>
   <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>

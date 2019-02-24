@@ -29,6 +29,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/profile/edit/password/{id}','ProfileController@updatePassword')->name('profile.update.password');
                 // All users
                 Route::get('/users', 'UsersController@index')->name('users');
+                Route::get('/users/{property}/{filter}', 'UsersController@filterUsers')->name('users.filter');
                 // Editor stuff ( Administrator can also be allowed )
                 Route::middleware('role:editor')->group(function() {
 //----------------------------------------------- Posts controller --------------------------------------//

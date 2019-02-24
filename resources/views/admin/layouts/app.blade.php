@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="{{asset('library/fontawesome/css/all.min.css')}}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('library/bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" id="main-stylesheet" data-version="1.2.0" href="{{asset('/styles/shards-dashboards.1.2.0.min.css')}}">
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <link rel="stylesheet" href="{{asset('library/hover.min.css')}}">
+    <link rel="stylesheet" href="{{asset('library/animate.min.css')}}">
+    <link rel="stylesheet" id="main-stylesheet" data-version="1.2.0" href="{{asset('/styles/style.min.css')}}">
+    <script async defer src="{{asset('library/js/button.js')}}"></script>
   </head>
   <body class="h-100">
     <div class="container-fluid">

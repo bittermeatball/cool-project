@@ -77,6 +77,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($users as $user)
+                                    @if($user->$property == $filter)
                                     <tr>
                                         <td>{{$user->id}}</td>
                                         <td>{{$user->name}}</td>
@@ -146,6 +147,7 @@
                                         @endif
                                         </td>
                                     </tr>
+                                    @endif
                                     @endforeach
                                 </tbody>
                             </table>

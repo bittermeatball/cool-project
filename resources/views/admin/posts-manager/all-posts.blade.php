@@ -56,13 +56,13 @@
                                         @endif
                                         <td>
                                             <a href="{{ route('post.show',$post->id)}}" >
-                                                <button type="button"class="mb-2 btn btn-outline-info mr-1">Preview</button>
+                                                <button type="button"class="mb-2 btn btn-info mr-1">Preview</button>
                                             </a>
                                         @if(Auth::user()->role == 'administrator' || Auth::user()->role == 'editor')
                                             <a href="{{ route('post.edit',$post->id)}}">
-                                                <button type="button" class="mb-2 btn btn-outline-warning mr-1">Edit</button>
+                                                <button type="button" class="mb-2 btn btn-warning mr-1">Edit</button>
                                             </a>
-                                            <button type="button" class="mb-2 btn btn-outline-danger mr-1" data-toggle="modal" data-target="#modalOf{{$post->id}}">
+                                            <button type="button" class="mb-2 btn btn-danger mr-1" data-toggle="modal" data-target="#modalOf{{$post->id}}">
                                                 Delete
                                             </button>
                                             <!-- Modal -->
@@ -104,7 +104,7 @@
                                             @if($post->status =='draft')
                                                 <form method="POST" action="{{route('post.publish', $post->id)}}">
                                                     {{ csrf_field() }}
-                                                    <button class="btn btn-outline-success" type="submit">Publish</button>
+                                                    <button class="btn btn-success" type="submit">Publish</button>
                                                 </form>
                                             @endif
                                         @endif

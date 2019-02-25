@@ -75,7 +75,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $post = Post::find($post);
+        $post = Post::find($post)->first();
 
         // show the view and pass the user to it
         return View::make('admin.posts-manager.edit-post')->with('post',$post);
@@ -109,16 +109,13 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     
-    public function publish($id)
+
+    public function destroy(Post $post)
     {
-
-        $post =  Post::find($id);
-        $post->status = 'publish';
-
-        $post->save();
+        $post = Post::find($post);
+        $post->delete();
    
-        return redirect('/admin/post');
+        return redirect('/admin/posts');
     }
 
     public function saveDraft($id)
@@ -131,12 +128,16 @@ class PostController extends Controller
    
         return redirect('/admin/post');
     }
-
-    public function destroy(Post $post)
+     
+    public function publish($id)
     {
-        $post = Post::find($post);
-        $post->delete();
+
+        $post =  Post::find($id);
+        $post->status = 'publish';
+
+        $post->save();
    
-        return redirect('/admin/posts');
+        return redirect('/admin/post');
     }
+
 }

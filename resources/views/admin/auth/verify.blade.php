@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.auth')
 
 @section('content')
 <div class="container">
@@ -21,4 +21,9 @@
         </div>
     </div>
 </div>
+@endsection
+@section('main-script')
+<script src="{{asset('library/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('library/bootstrap/js/popper.min.js')}}"></script>
+<script src="{{asset('library/bootstrap/js/bootstrap.min.js')}}"></script>
 @endsection

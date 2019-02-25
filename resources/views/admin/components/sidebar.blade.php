@@ -28,17 +28,31 @@
         <ul class="nav nav--no-borders flex-column">
             <li class="nav-item">
                 <a class="nav-link active" href="{{url('admin')}}">
-                    <i class="material-icons">&#xE917;</i>
+                    <i class="fas fa-chart-line" style="font-size: 18px"></i>
                     <span>Analytics</span>
                 </a>
             </li>
         </ul>
+        @if(Auth::user()->role == 'administrator')
+        <!-- Images manager section -->
+        <ul class="nav nav--no-borders flex-column">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                    <i class="fas fa-image" style="font-size: 18px"></i>
+                    <span>Library</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-small">
+                    <a class="dropdown-item " href="{{url('ckeditor/ckfinder/ckfinder.html')}}">All images</a>
+                </div>
+            </li>
+        </ul>
+        @endif
         <!-- Users manager section -->
         <h6 class="main-sidebar__nav-title">Users manager</h6>
         <ul class="nav nav--no-borders flex-column">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                    <i class="material-icons">&#xE7FD;</i>
+                    <i class="fas fa-user-tie" style="font-size: 18px"></i>
                     <span>User Account</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
@@ -54,7 +68,7 @@
         <ul class="nav nav--no-borders flex-column">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                    <i class="material-icons">&#xe873;</i>
+                    <i class="fas fa-file-alt" style="font-size: 18px"></i>
                     <span>Post</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
@@ -70,7 +84,7 @@
         <ul class="nav nav--no-borders flex-column">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                    <i class="material-icons">&#xe8e9;</i>
+                    <i class="fas fa-th-list" style="font-size: 18px"></i>
                     <span>Categories</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
@@ -83,7 +97,7 @@
         <ul class="nav nav--no-borders flex-column">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                    <i class="material-icons">&#xE892;</i>
+                    <i class="fas fa-tags" style="font-size: 18px"></i>
                     <span>Tags</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Controller;
 
 use App\Post;
+use App\Category;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +32,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        return View::make('admin.posts-manager.add-post');
+        $categories = Category::all()->toArray();
+        
+        return View::make('admin.posts-manager.add-post')
+        ->with('categories',$categories);
     }
 
     /**

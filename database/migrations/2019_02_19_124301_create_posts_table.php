@@ -20,6 +20,8 @@ class CreatePostsTable extends Migration
             $table->string('post_thumbnail')->default('Lorem ipsum')->nullable();
             $table->string('post_content',3000)->default('Lorem ipsum')->nullable();
             $table->string('post_author')->default('Editor');
+            $table->integer('category_id')->default('0')->nullable();
+            $table->integer('tag_id')->default('0')->nullable();
             $table->string('status')->default('draft');
             $table->timestamps();
         });

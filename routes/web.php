@@ -36,6 +36,11 @@ Route::namespace('Admin')->group(function () {
                     Route::resource('post', 'PostController');
                     Route::post('post/publish/{id}','PostController@publish')->name('post.publish');
                     Route::post('post/save-draft/{id}','PostController@saveDraft')->name('post.draft');
+//----------------------------------------------- Posts controller --------------------------------------//
+                    Route::resource('category', 'CategoryController');
+                    Route::get('/category/{property}/{filter}', 'CategoryController@filterCategories')->name('category.filter');
+                    Route::post('/category/activate/{id}','CategoryController@activate')->name('category.activate');
+                    Route::post('/category/deactivate/{id}','CategoryController@deactivate')->name('category.deactivate');
 //------------------------------------------------ Users control (Admin) --------------------------------------//
                     // Admin stuff
                     Route::middleware('role:administrator')->group(function (){

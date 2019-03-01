@@ -45,7 +45,7 @@
                     <span class="d-flex"><i class="material-icons mr-1">score</i><strong class="mr-1">Readability:</strong> <strong class="text-warning">Ok</strong></span>
                   </li>
                   <li class="list-group-item d-flex px-3">
-                    <button class="btn btn-sm btn-outline-accent"><i class="material-icons">save</i> Save Draft</button>
+                    <button type="submit" class="btn btn-sm btn-outline-accent"><i class="material-icons">save</i> Save Draft</button>
                     <button type="submit" class="btn btn-sm btn-accent ml-auto"><i class="material-icons">file_copy</i> Publish</button>
                   </li>
                 </ul>
@@ -55,31 +55,15 @@
             <!-- Post Overview -->
             <div class='card card-small mb-3'>
               <div class="card-header border-bottom">
-                <h6 class="m-0">Categories</h6>
+                <h6 class="m-0">Classify post</h6>
               </div>
               <div class='card-body p-0'>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item px-3 pb-2">
-                    <div class="custom-control custom-checkbox mb-1">
-                      <input type="checkbox" class="custom-control-input" id="category1" checked>
-                      <label class="custom-control-label" for="category1">Uncategorized</label>
-                    </div>
-                    <div class="custom-control custom-checkbox mb-1">
-                      <input type="checkbox" class="custom-control-input" id="category2" checked>
-                      <label class="custom-control-label" for="category2">Design</label>
-                    </div>
-                    <div class="custom-control custom-checkbox mb-1">
-                      <input type="checkbox" class="custom-control-input" id="category3">
-                      <label class="custom-control-label" for="category3">Development</label>
-                    </div>
-                    <div class="custom-control custom-checkbox mb-1">
-                      <input type="checkbox" class="custom-control-input" id="category4">
-                      <label class="custom-control-label" for="category4">Writing</label>
-                    </div>
-                    <div class="custom-control custom-checkbox mb-1">
-                      <input type="checkbox" class="custom-control-input" id="category5">
-                      <label class="custom-control-label" for="category5">Books</label>
-                    </div>
+                    <select name="category_id" class="form-control form-control-lg mb-3" >
+                      <option value="0" class="bg-secondary text-white">- Uncategorized -</option>
+                      <?php category_option($categories) ?>
+                    </select>
                   </li>
                   <li class="list-group-item d-flex px-3">
                     <div class="input-group">

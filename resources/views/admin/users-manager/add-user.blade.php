@@ -144,8 +144,8 @@
                     <textarea style="min-height: 87px;" id="userBio" name="userBio" class="form-control"></textarea>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="userTags">Tags</label>
-                    <input id="userTags" name="userTags" value="User Experience,UI Design, React JS, HTML & CSS, JavaScript, Bootstrap 4" class="d-none">
+                    <label for="tagsInput">Tags</label>
+                    <input id="tagsInput" name="userTags" value="User Experience,UI Design, React JS, HTML & CSS, JavaScript, Bootstrap 4" class="d-none">
                   </div>
                 </div>
                 <hr>
@@ -308,5 +308,5 @@
   <script src="{{asset('library/jquery/jquery.sharrre.min.js')}}"></script>
   <script src="{{asset('scripts/shards-dashboards.1.2.0.min.js')}}"></script>
   <script src="{{asset('library/bootstrap/js/bootstrap-tagsinput.min.js')}}"></script>
-  <script src="{{asset('scripts/app/app-edit-user-profile.1.2.0.min.js')}}"></script>
+  <script src="{{asset('scripts/app/app-tagsinput-pill.min.js')}}"></script>
 @endsection 

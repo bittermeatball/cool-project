@@ -89,17 +89,25 @@
                                             <td style="color: #ed3034">Banned</td>
                                         @endif
 
-                                        <td>
-                                            <a href="{{ route('user.show',$user->id)}}" >
-                                                <button type="button"class="mb-2 btn btn-info mr-1 hvr-wobble-horizontal animated bounceIn">Details</button>
+                                        <td class='text-center' style='width: 150px'>
+                                            <span class='btn btn-group'>
+                                            <a href="{{ route('user.show',$user->id)}}" class='mb-2 btn btn-sm btn-info mr-1 animated bounceIn' title='Details'>
+                                                <i class='fas fa-info-circle'></i>
                                             </a>
 
                                         @if(Auth::user()->role == 'administrator')
-                                            <a href="{{ route('user.edit',$user->id)}}">
-                                                <button type="button" class="mb-2 btn btn-warning mr-1 hvr-wobble-skew animated bounceIn">Edit</button>
+                                            {{-- Activate button --}}
+                                            @if($user->status =='deactivated')
+                                                <form method="POST" action="{{route('user.activate', $user->id)}}">
+                                                    {{ csrf_field() }}
+                                                    <button type='submit' class='mb-2 mr-1 btn btn-sm btn-success animated bounceIn hvr-buzz-out rounded-0' title='Activate'><i class='fas fa-undo-alt'></i></button>
+                                                </form>
+                                            @endif
+                                            <a href="{{ route('user.edit',$user->id)}}" class='mb-2 btn btn-sm btn-warning mr-1 animated bounceIn' title='Edit'>
+                                                <i class='far fa-edit'></i>
                                             </a>
-                                            <button type="button" class="mb-2 btn btn-danger mr-1 hvr-buzz-out animated bounceIn" data-toggle="modal" data-target="#modalOf{{$user->id}}">
-                                                Delete
+                                            <button type="button" class="mb-2 btn btn-sm btn-danger mr-1 hvr-buzz-out animated bounceIn" data-toggle="modal" data-target="#modalOf{{$user->id}}">
+                                                <i class='far fa-trash-alt'></i>
                                             </button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="modalOf{{$user->id}}" tabindex="-1" role="dialog" aria-labeledby="modalLabel" aria-hidden="true">
@@ -113,7 +121,7 @@
                                                         </div>
                                                         <div class="modal-body text-center">
                                                                 <i style="color: red; font-size: 72px " class="fas fa-exclamation-circle"></i>
-                                                                <h3>Are your sure ? This action can't be undone !</h3>
+                                                                <h3>Are your sure ? <br> This action can't be undone !</h3>
                                                             <h4><small><em>"User can be kept but deactivate"</em></small></h4>
                                                         </div>
                                                         <div class="modal-footer">
@@ -136,13 +144,7 @@
                                                 </div>
                                             </div>
                                             {{-- End modal --}}
-                                            {{-- Activate button --}}
-                                            @if($user->status =='deactivated')
-                                                <form method="POST" action="{{route('user.activate', $user->id)}}">
-                                                    {{ csrf_field() }}
-                                                    <button class="btn btn-success animated bounceIn hvr-buzz-out" type="submit">Activate</button>
-                                                </form>
-                                            @endif
+                                        </span>
                                         @endif
                                         </td>
                                     </tr>

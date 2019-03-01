@@ -88,8 +88,8 @@
                     <span>Categories</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
-                    <a class="dropdown-item " href="admin/categories">All categories</a>
-                    <a class="dropdown-item " href="admin/add-category">Add category</a>
+                    <a class="dropdown-item " href="{{route('category.index')}}">All categories</a>
+                    <a class="dropdown-item " href="{{route('category.create')}}">Add category</a>
                 </div>
             </li>
         </ul>

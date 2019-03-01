@@ -22,12 +22,8 @@ class Post extends Model
         'post_author',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    // protected $hidden = [
-    //     //
-    // ];
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\UserRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserEditRequest extends FormRequest
+class UserSocial extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,11 @@ class UserEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255|email',
-            'address' => 'string|max:255|nullable',
-            'phone' => 'string|max:255',
-            'bio' => 'string|max:255',
-            'userTags' => 'string|max:255',
-        ];
+            'facebook' => 'string|url|nullable',
+            'twitter' => 'string|url|nullable',
+            'github' => 'string|url|nullable',
+            'instagram' => 'string|url|nullable',
+            'snapchat' => 'string|url|nullable',
+            'googlePlus' => 'string|url|nullable',        ];
     }
 }

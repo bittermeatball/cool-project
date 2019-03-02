@@ -51,11 +51,26 @@ class CategoryController extends Controller
             'parent_id'=> $request->get('parent_id'),
             'keywords'=> $request->get('keywords'),
             'description'=> $request->get('description'),
-          ]);
+        ]);
 
-          $category->save();
+        $category->save();
 
-          return redirect('/admin/category');
+        return redirect('/admin/category');
+    }
+
+    public function storeFromPost(CategoryRequest $request)
+    {
+        $request->validated();
+
+        $category = new Category([
+            'category_name' => $request->get('category_name'),
+            'slug'=> slug($request->get('category_name')),
+            'parent_id'=> $request->get('parent_id'),
+        ]);
+
+        $category->save();
+
+        return back();
     }
 
     public function show(Category $category)

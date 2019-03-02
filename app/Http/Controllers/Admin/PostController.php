@@ -10,6 +10,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PostRequests\CategoryRequest;
 
 class PostController extends Controller
 {
@@ -44,18 +45,32 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, CategoryRequest $request_2)
     {
-        $post = new Post([
-            'post_title' => $request->get('post_title'),
-            'post_description'=> $request->get('post_description'),
-            'post_thumbnail'=> $request->get('post_thumbnail'),
-            'post_content'=> $request->get('post_content'),
-            'post_author'=> Auth::user()->name,
-          ]);
+        if($request->get('category_name') == NULL){
+            $post = new Post([
+                'post_title' => $request->get('post_title'),
+                'post_description'=> $request->get('post_description'),
+                'post_thumbnail'=> $request->get('post_thumbnail'),
+                'post_content'=> $request->get('post_content'),
+                'post_author'=> Auth::user()->name,
+                ]);
+                
+                $post->save();
+                return redirect('/admin/post');   
+        } 
+        else {
+            $request_2->validated();
 
-        $post->save();
-        return redirect('/admin/post');
+            $category = new Category([
+                'category_name' => $request_2->get('category_name'),
+                'slug'=> slug($request_2->get('category_name')),
+                'parent_id'=> $request_2->get('parent_id'),
+            ]);
+
+            $category->save();
+            return redirect()->back()->withOldInput();
+        }
     }
 
     /**

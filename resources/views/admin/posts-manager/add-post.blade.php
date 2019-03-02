@@ -62,7 +62,6 @@
                   <li class="list-group-item px-3 pb-2">
                     <select name="category_id" class="form-control form-control-lg mb-3" >
                       <option value="0" class="bg-secondary text-white">- Uncategorized -</option>
-                      <?php category_option($categories) ?>
                     </select>
                   </li>
                   <li class="list-group-item d-flex px-3">

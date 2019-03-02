@@ -70,7 +70,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php category_table($categories) ?>
+                                    <?php
+                                        category_table($categories);
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

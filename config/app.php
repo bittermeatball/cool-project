@@ -176,7 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         // New
-        Collective\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class
 
     ],
 
@@ -229,7 +229,6 @@ return [
         // New
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
     ],
 
 ];

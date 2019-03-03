@@ -13,7 +13,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Post::class, function (Faker $faker) {
+$factory->define(App\Models\Post::class, function (Faker $faker) {
     return [
         'post_title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
         'post_description' => $faker->sentence($nbWords = 10, $variableNbWords = true),

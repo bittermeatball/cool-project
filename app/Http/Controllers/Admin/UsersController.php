@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-use App\Http\Requests\UserRequest; // Custom request
-use App\Http\Requests\UserEditRequest; // Custom request
-use App\Http\Requests\UserPassword; // Custom request
-use App\Http\Requests\UserSocial; // Custom request
+use App\Http\Requests\UserRequests\UserRequest; // Custom request
+use App\Http\Requests\UserRequests\UserEditRequest; // Custom request
+use App\Http\Requests\UserRequests\UserPassword; // Custom request
+use App\Http\Requests\UserRequests\UserSocial; // Custom request
 
-use App\User;
+use App\Models\User;
 
 class UsersController extends Controller
 {

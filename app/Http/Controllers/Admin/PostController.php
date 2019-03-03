@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Controller;
 
-use App\Post;
-use App\Category;
+use App\Models\Post;
+use App\Models\Category;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\PostRequests\CategoryRequest;
+use App\Http\Requests\PostRequests\CategoryFromPostRequest;
 
 class PostController extends Controller
 {
@@ -45,38 +45,38 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, CategoryRequest $request_2)
+    public function store(Request $request, CategoryFromPostRequest $c_request)
     {
-        if($request->get('category_name') == NULL){
-            $post = new Post([
-                'post_title' => $request->get('post_title'),
-                'post_description'=> $request->get('post_description'),
-                'post_thumbnail'=> $request->get('post_thumbnail'),
-                'post_content'=> $request->get('post_content'),
-                'post_author'=> Auth::user()->name,
-                ]);
-                
-                $post->save();
-                return redirect('/admin/post');   
-        } 
-        else {
-            $request_2->validated();
+        $category_id = $request->get('category_id');
 
+        if ($c_request->get('category_name') != NULL || $c_request->get('category_name') != '') {
+            $c_request->validated();
             $category = new Category([
-                'category_name' => $request_2->get('category_name'),
-                'slug'=> slug($request_2->get('category_name')),
-                'parent_id'=> $request_2->get('parent_id'),
+                'category_name' => $c_request->get('category_name'),
+                'slug'=> slug($c_request->get('category_name')),
+                'parent_id'=> $c_request->get('parent_id'),
             ]);
-
-            $category->save();
-            return redirect()->back()->withOldInput();
+            $category->save();    
+            $category_id = $category->id;        
         }
+
+        $post = new Post([
+            'post_title' => $request->get('post_title'),
+            'post_description'=> $request->get('post_description'),
+            'post_thumbnail'=> $request->get('post_thumbnail'),
+            'post_content'=> $request->get('post_content'),
+            'category_id'=> $category_id,
+            'post_author'=> Auth::user()->name,
+            ]);
+            $post->save();
+            return redirect('/admin/post');   
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
@@ -90,7 +90,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
@@ -105,7 +105,7 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $post)
@@ -116,6 +116,7 @@ class PostController extends Controller
         $post->description = $request->get('post_description');
         $post->thumbnail = $request->get('post_thumbnail');
         $post->content = $request->get('post_content');
+        $post->category_id = $request->get('category_id');
         $post->author =  Auth::user()->name;
 
         $post->save();
@@ -125,7 +126,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
 

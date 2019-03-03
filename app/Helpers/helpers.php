@@ -266,7 +266,7 @@ function category_table ($categories,$pivot = 0, $str = "") {
 }
 
 // Displaying in add-category and edit-category
-function category_option ($categories,$pivot = 0, $str = "-") {
+function category_option ($categories,$pivot = 0, $str = "-", $select = 0) {
 
     foreach ($categories as $value) {
 
@@ -275,8 +275,12 @@ function category_option ($categories,$pivot = 0, $str = "-") {
         $parent_id = $value["parent_id"];  
     
         if ($parent_id == $pivot){
+            if($select != 0 && $id == $select){
+                echo "<option value='$id' selected='selected'>$str $category_name</option>";
 
-            echo "<option value='$id'>$str $category_name</option>";
+            } else {
+                echo "<option value='$id'>$str $category_name</option>";
+            }
 
             category_option($categories, $id, $str . "-");            
         }

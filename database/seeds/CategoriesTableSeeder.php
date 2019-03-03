@@ -18,13 +18,13 @@ class CategoriesTableSeeder extends Seeder
             'category_name' => 'Uncategorized',
             'slug' => 'uncategorized',
             'status' => 'active',
-            'parent_id' => NULL,
+            'parent_id' => 0,
             'keywords' => 'uncategorized',
             'description' => 'uncategorized',
         ]);
 
         $faker = Faker\Factory::create();
 
-        factory(App\Category::class,10)->create();
+        factory(App\Models\Category::class,10)->create();
     }
 }

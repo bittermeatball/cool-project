@@ -13,6 +13,6 @@ class PostsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        factory(App\Post::class,20)->create();
+        factory(App\Models\Post::class,20)->create();
     }
 }

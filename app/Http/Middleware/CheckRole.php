@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Auth;
-use App\User;
+use App\Models\User;
 use Closure;
 
 class CheckRole

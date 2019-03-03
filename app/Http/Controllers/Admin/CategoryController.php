@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Controller;
 
-use App\Category;
+use App\Models\Category;
 
 use Illuminate\Http\Request;
 

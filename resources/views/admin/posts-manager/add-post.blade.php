@@ -76,26 +76,19 @@
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item px-3 pb-2">
                     <select name="category_id" class="form-control form-control-lg mb-3" >
-                      <option value="1" class="bg-secondary text-white">- Uncategorized -</option>
                       <?php category_option($categories) ?>
                     </select>
                   </li>
-                  
-                    {{-- Store category from post --}}
-                    {{ csrf_field() }}
-                    <li class="list-group-item d-flex px-3">
-                      <div class="input-group">
-                        <input type="text" class="form-control" placeholder="New category" aria-label="Add new category" aria-describedby="basic-addon2"
-                        name="category_name">
-                        <select name="parent_id" class="form-control" >
-                          <option value="0" class="bg-secondary text-white">- No parent -</option>
-                          <?php category_option($categories) ?>
-                        </select>
-                        <div class="input-group-append">
-                          <button class="btn btn-white px-2" type="submit"><i class="material-icons">add</i></button>
-                        </div>                      
-                      </div>
-                    </li>
+                  <li class="list-group-item d-flex px-3">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="New category" aria-label="Add new category" aria-describedby="basic-addon2"
+                      name="category_name">
+                      <select name="parent_id" class="form-control" >
+                        <option value="0" class="bg-secondary text-white">- No parent -</option>
+                        <?php category_option($categories) ?>
+                      </select>                   
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>

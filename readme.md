@@ -24,7 +24,14 @@ php artisan migrate
 
 php artisan db:seed
 
+default user (email and password): 
+test@gmail.com
+1234567890
+
+-----------------------------
 Go to the browser and enjoy !
+-----------------------------
+
 
 # For MacOS
 
@@ -59,5 +66,13 @@ php artisan migrate
 php artisan db:seed
 
 Go to the browser and enjoy !
+
+default user (email and password): 
+test@gmail.com
+1234567890
+
+-----------------------------
+Go to the browser and enjoy !
+-----------------------------
 
 <a href="https://fb.com/NguyenHuuNguyenY"><button style="color: white; background-color:#122f5e; border-radius: 7px">My Facebook</button></a>

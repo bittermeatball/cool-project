@@ -176,8 +176,11 @@ function category_table ($categories,$pivot = 0, $str = "") {
         $slug = $category["slug"];
         $parent_id = $category["parent_id"];
         $status = $category["status"];
-    
+        $keywords = $category["keywords"];
+        $description = $category["description"];
+
         if ($parent_id == $pivot) {
+
             if ($parent_id == 0){
                 echo    "<tr style='background-color: rgb(214, 214, 214)' class='text-dark' title='Parent'>";
                 echo    "<td>$id</td>"; 
@@ -193,19 +196,49 @@ function category_table ($categories,$pivot = 0, $str = "") {
                 ->first();
                 echo    "<td>- $cate->category_name</td>";
             }
+
             echo    "<td>$slug</td>";
+
             if ($status == "active"){
                 echo    "<td style='color: rgb(32, 223, 80)'>Enabled</td>";
             } elseif ($status == "deactivated") {
                 echo    "<td style='color: rgb(237, 48, 52)'>Disabled</td>"; 
             }
+
             echo "
                 <td class='text-center' style='width: 150px'>
                     <span class='btn btn-group'>
-                        <a href='".route('category.show',$id)."' class='mb-2 btn btn-sm btn-info mr-1 animated bounceIn' title='Details'>
-                            <i class='fas fa-info-circle'></i>
-                        </a>            
+                    <button type='button' class='mb-2 btn btn-sm btn-info mr-1 animated bounceIn' title='Details' data-toggle='modal' data-target='#detailsOf".$id."'>
+                        <i class='fas fa-info-circle'></i>
+                    </button>
+                    <div class='modal fade' id='detailsOf".$id."' tabindex='-1' role='dialog' aria-labelledby='detailsOf".$id."Title' aria-hidden='true'>
+                        <div class='modal-dialog modal-dialog-centered' role='document'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <h5 class='modal-title' id='detailsOf".$id."Title'>Category's details</h5>
+                                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                        <span aria-hidden='true'>&times;</span>
+                                    </button>
+                                </div>
+                                <div class='modal-body'>
+                                    <ul class='list-group list-group-flush text-left'>
+                                        <li class='list-group-item'><b>Status : </b>".$status."</li>
+                                        <li class='list-group-item'><b>ID : </b>".$id."</li>
+                                        <li class='list-group-item'><b>Tag's name : </b>".$category_name."</li>
+                                        <li class='list-group-item'><b>Keywords : </b>".$keywords."</li>
+                                        <li class='list-group-item'><b>Description : </b>".$description."</li>
+                                    </ul>
+                                </div>
+                                <div class='modal-footer'>
+                                    <a href='".route('category.edit',$id)."' class='btn btn-warning text-danger animated bounceIn' title='Edit'>
+                                        Edit
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             ";
+
             if ($status == "deactivated"){
                 echo "
                     <form method='POST' action='".route('category.activate', $id)."'>
@@ -214,6 +247,14 @@ function category_table ($categories,$pivot = 0, $str = "") {
                     </form>                    
                 ";                    
             };
+
+                if ($parent_id == 0){
+                    $disabled = "disabled";
+                    $delete_title = "Action disabled with super parent category";
+                } else {
+                    $disabled = "";
+                    $delete_title = "Delete";
+                }
                 echo "
                         <a href='".route('category.edit',$id)."' class='mb-2 btn btn-sm btn-warning mr-1 animated bounceIn' title='Edit'>
                             <i class='far fa-edit'></i>
@@ -234,7 +275,8 @@ function category_table ($categories,$pivot = 0, $str = "") {
                                 </div>
                                 <div class='modal-body text-center'>
                                         <i style='color: red; font-size: 72px ' class='fas fa-exclamation-circle'></i>
-                                        <h3>Are your sure ? This action can't be undone !</h3>
+                                        <h3><small>Are your sure ? This action can't be undone !</small></h3>
+                                        <h3>Deleting categories which have child cause seriously bad effect !</h3>
                                     <h4><small><em>'Category can be kept but disabled'</em></small></h4>
                                 </div>
                                 <div class='modal-footer'>
@@ -251,7 +293,7 @@ function category_table ($categories,$pivot = 0, $str = "") {
                                     <form method='POST' action='".route('category.destroy', $id)."'>
                                         <input type='hidden' name='_method' value='delete'>
                                         ".csrf_field()."
-                                        <button class='btn btn-danger hvr-buzz' type='submit'>Delete</button>
+                                        <button class='btn btn-danger hvr-buzz ' type='submit' title='".$delete_title."' ".$disabled.">Delete</button>
                                     </form>
                                 </div>
                             </div>
@@ -266,7 +308,7 @@ function category_table ($categories,$pivot = 0, $str = "") {
 }
 
 // Displaying in add-category and edit-category
-function category_option ($categories,$pivot = 0, $str = "-", $select = 0) {
+function category_option ($categories, $select = 0, $pivot = 0, $str = "-") {
 
     foreach ($categories as $value) {
 
@@ -275,16 +317,36 @@ function category_option ($categories,$pivot = 0, $str = "-", $select = 0) {
         $parent_id = $value["parent_id"];  
     
         if ($parent_id == $pivot){
-            if($select != 0 && $id == $select){
-                echo "<option value='$id' selected='selected'>$str $category_name</option>";
-
-            } else {
-                echo "<option value='$id'>$str $category_name</option>";
+            if ($select != 0 && $id == $select){
+                echo "<option value='$id' selected='selected' title='Parent category'>$str $category_name</option>";
+            }
+            else {
+                echo "<option value='$id' title='Parent category'>$str $category_name</option>";
             }
 
-            category_option($categories, $id, $str . "-");            
+            category_option($categories, $select, $id, $str . "-");
         }
     }
+}
+
+function show_breadcrumb($category, $str = "") {
+    if($category->parent->parent_id == 0) {
+        
+        print_r(
+            "<a href='".route('category.show',$category->parent->id)."'>".
+                $category->parent->category_name.
+            "</a>".
+            " > ".
+            $str
+        );
+    };
+    show_breadcrumb(
+        $category->parent,
+        "<a href='".route('category.show', $category->parent->id)."'>".
+            $category->parent->category_name.
+        "</a>".
+        " > ". $str
+    );
 }
 
 ?>

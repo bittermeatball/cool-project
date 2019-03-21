@@ -101,8 +101,7 @@
                     <span>Tags</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
-                    <a class="dropdown-item " href="admin/tags">All tags</a>
-                    <a class="dropdown-item " href="admin/add-tag">Add tag</a>
+                    <a class="dropdown-item " href="{{route('tag.index')}}">All tags</a>
                 </div>
             </li>
         </ul>

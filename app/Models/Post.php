@@ -20,12 +20,17 @@ class Post extends Model
         'post_thumbnail',
         'post_content',
         'category_id',
-        'tag_id',
         'post_author',
     ];
 
     public function category()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo('App\Models\Category','id');
     }
+
+    public function tag()
+    {
+        return $this->belongsToMany('App\Models\Tag','id');
+    }
+
 }

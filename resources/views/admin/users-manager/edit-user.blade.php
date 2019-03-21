@@ -87,7 +87,6 @@
                           <div class="form-group col-md-6 {{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name">Full Name</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}">
-                            
                             @if ($errors->has('name'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('name') }}</strong>

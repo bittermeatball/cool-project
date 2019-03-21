@@ -36,8 +36,9 @@
                                         <th scope="col" class="border-0">Thumbnail</th>
                                         <th scope="col" class="border-0">Title</th>
                                         <th scope="col" class="border-0">Description</th>
+                                        <th scope="col" class="border-0">Category</th>
                                         <th scope="col" class="border-0">Status</th>
-                                        <th scope="col" class="border-0"></th>
+                                        <th scope="col" class="border-0">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,6 +50,7 @@
                                         </td>                                                    
                                         <td>{{$post->post_title}}</td>
                                         <td>{{$post->post_description}}</td>
+                                        <td>{{$post->category["category_name"]}} </td>
                                         @if($post->status =='publish')
                                             <td style="color: #20df50">Published</td>
                                         @elseif($post->status =='draft')

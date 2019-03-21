@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\UserRequests;
+namespace App\Http\Requests\PostRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class TagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,9 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255|email|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'role' => 'required',
+            'tag_name' => 'required|string|max:255|unique:tags',
+            'keywords' => 'string|max:300|nullable',
+            'description' => 'string|max:300|nullable',
         ];
     }
 }

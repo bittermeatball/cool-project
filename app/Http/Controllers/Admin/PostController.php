@@ -22,6 +22,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+
         // View all posts
         return View::make('admin.posts-manager.all-posts')->with('posts',$posts);
     }
@@ -132,6 +133,14 @@ class PostController extends Controller
 
 
     public function destroy(Post $post)
+    {
+        $post = Post::find($post);
+        $post->delete();
+   
+        return redirect('/admin/posts');
+    }
+
+    public function softDelete(Post $post)
     {
         $post = Post::find($post);
         $post->delete();

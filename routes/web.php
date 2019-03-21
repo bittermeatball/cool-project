@@ -39,9 +39,15 @@ Route::namespace('Admin')->group(function () {
 //----------------------------------------------- Categories controller --------------------------------------//
                     Route::resource('category', 'CategoryController');
                     Route::get('/category/{property}/{filter}', 'CategoryController@filterCategories')->name('category.filter');
-                    Route::post('/category/activate/{id}','CategoryController@activate')->name('category.activate');
-                    Route::post('/category/deactivate/{id}','CategoryController@deactivate')->name('category.deactivate');
+                    Route::post('/category/activate/{category}','CategoryController@activate')->name('category.activate');
+                    Route::post('/category/deactivate/{category}','CategoryController@deactivate')->name('category.deactivate');
                     Route::post('/category/store-from-post','CategoryController@storeFromPost')->name('category.store.post');
+//----------------------------------------------- Tags controller --------------------------------------//
+                    Route::resource('tag', 'TagController');
+                    Route::get('/tag/{property}/{filter}', 'TagController@filterTags')->name('tag.filter');
+                    Route::post('/tag/activate/{tag}','TagController@activate')->name('tag.activate');
+                    Route::post('/tag/deactivate/{tag}','TagController@deactivate')->name('tag.deactivate');
+                    Route::post('/tag/store-from-post','TagController@storeFromPost')->name('tag.store.post');
 //------------------------------------------------ Users control (Admin) --------------------------------------//
                     // Admin stuff
                     Route::middleware('role:administrator')->group(function (){
@@ -57,14 +63,15 @@ Route::namespace('Admin')->group(function () {
                         Route::post('/user/activate/{id}','UsersController@activate')->name('user.activate');
                         Route::post('/user/deactivate/{id}','UsersController@deactivate')->name('user.deactivate');
                         Route::delete('/user/delete/{id}','UsersController@destroy')->name('user.destroy');
-                    });                    
+                    });
                 });
                 // Show user profile
                 Route::get('/user/{id}','UsersController@show')->name('user.show');
             });
-        });       
+        });
     });
 });
+
     Route::get('/403',function(){return view('errors.403');});
     Route::get('/403/banned',function(){return view('errors.banned');});
 

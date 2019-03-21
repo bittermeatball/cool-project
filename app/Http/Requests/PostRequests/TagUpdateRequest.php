@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\UserRequests;
+namespace App\Http\Requests\PostRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\User;
+use App\Models\Tag;
 
-class UserEditRequest extends FormRequest
+class TagUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,24 +25,23 @@ class UserEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'address' => 'string|max:255|nullable',
-            'phone' => 'string|max:255',
-            'bio' => 'string|max:255',
-            'userTags' => 'string|max:255',
+            'tag_name' => 'required|string|max:255',
+            'keywords' => 'string|max:300|nullable',
+            'description' => 'string|max:300|nullable',
         ];
     }
 
     public function withValidator($validator) {
         $validator->after(function ($validator) {
             if (
-                $this->request->get('email')
+                slug($this->request->get('tag_name'))
                 !=
-                User::where('id',$this->id)->get()->first()->email
+                slug(Tag::where('id',$this->tag->id)->get()->first()->tag_name)
             )
             {
-                $validator->errors()->add('email','This email has already been used !');
+                $validator->errors()->add('tag_name','URL form tag has already exist');
             }
         });
     }
+
 }

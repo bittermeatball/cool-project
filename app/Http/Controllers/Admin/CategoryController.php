@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Controller;
-
-use App\Models\Category;
-
 use Illuminate\Http\Request;
-
-use App\Http\Requests\PostRequests\CategoryRequest;
-
 use Illuminate\Support\Facades\View;
+use App\Http\Requests\PostRequests\CategoryRequest;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -75,7 +71,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        $category = Category::find($category);
+        $posts = Category::find($category)->post->toArray();
 
         return View::make('admin.categories-manager.show-category')
         ->with('category',$category);        
@@ -83,10 +79,12 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        $category = Category::find($category);
+        $category = Category::find($category)->last();
+        $categories = Category::all()->toArray();
 
         return View::make('admin.categories-manager.edit-category')
-        ->with('category',$category);     
+        ->with('category',$category)
+        ->with('categories',$categories);     
     }
 
     public function update(CategoryRequest $request, Category $category)
@@ -110,16 +108,16 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        $category = Category::find($id);
+        $category = Category::find($category)->first();
         $category->delete();
    
         return redirect('/admin/category');
     }
     
-    public function activate($id)
+    public function activate($category)
     {
 
-        $category =  Category::find($id);
+        $category =  Category::find($category);
         $category->status = 'active';
 
         $category->save();
@@ -127,15 +125,16 @@ class CategoryController extends Controller
         return redirect('/admin/category');
     }
 
-    public function deactivate($id)
+    public function deactivate($category)
     {
 
-        $category =  Category::find($id);
+        $category =  Category::find($category);
         $category->status = 'deactivated';
 
         $category->save();
    
         return redirect('/admin/category');
+    
     }
 
 }
